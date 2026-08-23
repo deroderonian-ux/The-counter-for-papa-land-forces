@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuenta regresiva</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .contador {
+      background: #222;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #000;
+    }
+    h1 { font-size: 28px; }
+    #tiempo {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="contador">
+    <h1>⏳ Cuenta regresiva</h1>
+    <p>Hasta el 5 de octubre de 2026</p>
+    <div id="tiempo">Cargando...</div>
+  </div>
+
+  <script>
+    const fechaFinal = new Date("2026-10-05T00:00:00").getTime();
+
+    function actualizar() {
+      const ahora = Date.now();
+      const diferencia = fechaFinal - ahora;
+
+      if (diferencia <= 0) {
+        document.getElementById("tiempo").textContent = "🎉 ¡Llegó el 5 de octubre!";
+        return;
+      }
+
+      const dias = Math.floor(diferencia / 86400000);
+      const horas = Math.floor((diferencia / 3600000) % 24);
+      const minutos = Math.floor((diferencia / 60000) % 60);
+      const segundos = Math.floor((diferencia / 1000) % 60);
+
+      document.getElementById("tiempo").textContent =
+        `${dias} días ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    actualizar();
+    setInterval(actualizar, 1000);
+  </script>
+</body>
+</html>
